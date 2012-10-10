@@ -1,5 +1,5 @@
 
-El archivo out.xml, resultante de ejecutar crawler.py, contine las 
+El archivo ask.xml, resultante de ejecutar crawler.py, contine las 
 preguntas-respuestas obtenidas del sitio ask.fm, cada una en el siguiente formato
 
 <questionBox user="....">
@@ -18,10 +18,10 @@ Cada línea del archivo de salida es de la forma
 donde <s> y </s> representan el inicio y fin de sentencia respectivamente.
 
 Nro de Preguntas: 5204
-# cat out.xml | grep -G "\<question[\> ]" | wc -l
+# cat ask.xml | grep -G "\<question[\> ]" | wc -l
 
 Nro de Respuestas: 4944
-# cat out.xml | grep -G "\<answer\>" | wc -l
+# cat ask.xml | grep -G "\<answer\>" | wc -l
 
 Cantidad de Tokens: 115291
 # wc -w tokens.txt
