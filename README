@@ -1,0 +1,33 @@
+
+El archivo out.xml, resultante de ejecutar crawler.py, contine las 
+preguntas-respuestas obtenidas del sitio ask.fm, cada una en el siguiente formato
+
+<questionBox user="....">
+	<question author="....">....</question>
+	<answer>....</answer>
+</questionBox>
+
+El modulo tokenizer.py toma este archivo como entrada y lo separa en tokens.
+Un token puede ser:
+	*Una palabra (secuencia de letras a..z incluyendo letras con acentos, 
+	dieresis, etc, y incluyendo numeros)
+	*Secuencia de simbolos (los simbolos se separan de las palabras aunque no haya un espacio)
+
+Cada línea del archivo de salida es de la forma
+<s>token-1<br/>token-2<br/>.................<br/>token-n</s>
+donde <s> y </s> representan el inicio y fin de sentencia respectivamente.
+
+Nro de Preguntas: 5204
+# cat out.xml | grep -G "\<question[\> ]" | wc -l
+
+Nro de Respuestas: 4944
+# cat out.xml | grep -G "\<answer\>" | wc -l
+
+Cantidad de Tokens: 115291
+# wc -w tokens.txt
+
+Longitud del lexicon: 14218
+# sort tokens.txt | uniq | wc -w
+
+
+# sort tokens.txt | uniq -c | sort /R > count.txt
