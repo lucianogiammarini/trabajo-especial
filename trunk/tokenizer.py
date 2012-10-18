@@ -6,42 +6,101 @@ from xml.dom.minidom import parseString
 import sys, re
 import codecs
 
+EMOT = [':D',':O',':P',':3',':V','<3','=D','=P','8)','8|','B)','B|',':-D',':-O',
+		':-P','>:O','3:)','8-)','8-|','B-|','O:)']
 EXP = '([^ABCDEFGHIJKLMNOPQRSTUVWXYZ¡…Õ”⁄‹—abcdefghijklmnopqrstuvwxyz·ÈÌÛ˙¸Ò]*)'
 def flattener(lst):
     return [item for sublist in lst for item in sublist if item != '']
 
+def enum(**enums):
+    return type('Enum', (), enums)
+
+Type = enum(SYMBOL=0, DIGIT=1, ALPHA=2, SPACE=3)
+
 class Tokenizer(object):
-	def __init__(self, input, output, lowercase):
+
+	def __init__(self, input, output, lowercase, tokens=None):
 		self.input = codecs.open(input,'r','utf-8')
 		self.output = codecs.open(output,'w','utf-8')
+		if tokens:
+			self.tokens = codecs.open(tokens,'w','utf-8')
+		else:
+			self.tokens = None
 		self.lowercase = lowercase
-		self.tokens = u''
 
 	def start(self):
 		content = self.input.read()
 
-		dom = parseString(content.encode('utf-8'))
-		question_boxes = dom.getElementsByTagName("questionBox")
+		self.dom = parseString(content.encode('utf-8'))
+		question_boxes = self.dom.getElementsByTagName("questionBox")
 		
 		for box in question_boxes:
 			question = box.getElementsByTagName("question")
 			if question == [] or question[0].firstChild == None:
 				continue
-			self.tokens += self.tokenize(question[0].firstChild.nodeValue)
-
+			self.tokenize(question[0])
+			
 			answer = box.getElementsByTagName("answer")
 			if answer == [] or answer[0].firstChild == None:
 				continue
-			self.tokens += self.tokenize(answer[0].firstChild.nodeValue)
+			self.tokenize(answer[0])
 
-		if self.lowercase:
-			self.tokens = self.tokens.lower()
-		self.output.write(self.tokens)
+		#if self.lowercase:
+		#	self.tokens = self.tokens.lower()
+		self.output.write(self.dom.toxml())
 
-	def tokenize(self, text):
-		s = re.split('\s', text)
-		x = flattener(map(lambda x: re.split(EXP, x), s))
-		return '<s>' + '<br/>'.join(x) + '</s>\n'
+	def type(self, char):
+		if char.isalpha():
+			return Type.ALPHA
+		elif char.isdigit():
+			return Type.DIGIT
+		elif char.isspace():
+			return Type.SPACE
+		else:
+			return Type.SYMBOL
+
+	def tokenize(self, element):
+		text = element.firstChild.nodeValue
+		length = len(text)
+		if length == 0:
+			return
+
+		prevType = self.type(text[0])
+		tokens = [text[0]]
+		pos = 1
+		while pos < length:
+			type = self.type(text[pos])
+
+			# si es emoticon de tres caracteres o es digit[.,]digit los dejo juntos
+			if pos+2 <= length and (text[pos-1:pos+2].upper() in EMOT or 
+					(prevType == self.type(text[pos+1]) == Type.DIGIT and 
+					text[pos] in ['.',','])):
+				tokens[-1] += text[pos:pos+2]
+				prevType = self.type(text[pos+1])
+				pos+=2
+				continue
+			# si es emoticon de dos caracteres
+			if text[pos-1:pos+1].upper() in EMOT:
+				tokens[-1] += text[pos]
+				prevType = type
+				pos+=1
+				continue
+
+			if type != prevType and type != Type.SPACE:
+				# Si es distinto al anterior es un nuevo token
+				tokens.append(text[pos])
+			elif type != Type.SPACE: 
+				# Si es igual al anterior pertenece al mismo token
+				# Pero no se agrega si es un espacio
+				tokens[-1] += text[pos]
+
+			prevType = type
+			pos+=1
+
+		element.removeChild(element.childNodes[0])
+		element.appendChild(self.dom.createTextNode('</br>'.join(tokens)))
+		if self.tokens:
+			self.tokens.write('\n'.join(tokens)+'\n')
 
 def parse_options():
 	parser = argparse.ArgumentParser()
@@ -51,12 +110,15 @@ def parse_options():
 	parser.add_argument('-o', '--output', metavar='output', type=str)
 	
 	parser.add_argument('-l', '--lowercase', action='store_true', default=False)
+	
+	parser.add_argument('-t', '--tokens', metavar='tokens', type=str, 
+				help='File to save only tokens')
 
 	return parser.parse_args()
 
 def main():
 	args = parse_options()
-	t = Tokenizer(args.input, args.output, args.lowercase)
+	t = Tokenizer(args.input, args.output, args.lowercase, args.tokens)
 	t.start()
 
 if __name__ == "__main__":
