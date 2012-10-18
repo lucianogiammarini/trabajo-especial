@@ -23,7 +23,7 @@ def create_xml(question, answer, author=None, user=None):
 	author_arg = ' author="%s"' %author
 	user_arg = ' user="%s"' %user
 
-	xml = '<questionBox%s>\n' %user_arg if user else ''
+	xml = u'<questionBox%s>\n' %user_arg if user else ''
 	xml += '\t<question%s>%s</question>\n' %(author_arg if author else '', to_valid_xml(question))
 	if answer != '':
 		xml += '\t<answer>%s</answer>\n' %to_valid_xml(answer)
@@ -71,7 +71,7 @@ class Crawler(object):
 		self.visited = []
 
 	def crawl(self):
-		self.out.write('<?xml version="1.0" encoding="utf-8" ?>\n<root>\n')
+		self.out.write(u'<?xml version="1.0" encoding="utf-8" ?>\n<root>\n'.encode('utf-8'))
 
 		while len(self.visit) > 0 and self.count > 0:
 			user = self.visit.pop(0)
@@ -127,8 +127,9 @@ class Crawler(object):
 		request, handle = self.open(url)
 		if handle:
 			try:
-				content = unicode(handle.open(request).read(), "utf-8",	errors="replace")
-				return content
+				content = handle.open(request).read()
+				ucontent = unicode(content, "utf-8", errors="replace")
+				return ucontent
 			except urllib2.HTTPError, error:
 				if error.code == 404:
 					print >> sys.stderr, "ERROR: %s -> %s" % (error, error.url)

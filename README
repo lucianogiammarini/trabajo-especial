@@ -1,3 +1,4 @@
+http://trabajo-especial.googlecode.com/svn/trunk/
 
 El archivo ask.xml, resultante de ejecutar crawler.py, contine las 
 preguntas-respuestas obtenidas del sitio ask.fm, cada una en el siguiente formato
@@ -17,17 +18,18 @@ Cada línea del archivo de salida es de la forma
 <s>token-1<br/>token-2<br/>.................<br/>token-n</s>
 donde <s> y </s> representan el inicio y fin de sentencia respectivamente.
 
-Nro de Preguntas: 5204
-# cat ask.xml | grep -G "\<question[\> ]" | wc -l
+Información del corpus:
 
-Nro de Respuestas: 4944
-# cat ask.xml | grep -G "\<answer\>" | wc -l
+	Nro de Preguntas: 5204
+	# cat ask.xml | grep -G "\<question[\> ]" | wc -l
 
-Cantidad de Tokens: 115291
-# wc -w tokens.txt
+	Nro de Respuestas: 4944
+	# cat ask.xml | grep -G "\<answer\>" | wc -l
 
-Longitud del lexicon: 14218
-# sort tokens.txt | uniq | wc -w
+	Cantidad de Tokens: 115291
+	# wc -w tokens.txt
 
+	Longitud del lexicon: 14218
+	# sort tokens.txt | uniq | wc -w
 
 # sort tokens.txt | uniq -c | sort /R > count.txt
