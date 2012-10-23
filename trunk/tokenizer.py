@@ -45,8 +45,6 @@ class Tokenizer(object):
 				continue
 			self.tokenize(answer[0])
 
-		#if self.lowercase:
-		#	self.tokens = self.tokens.lower()
 		self.output.write(self.dom.toxml())
 
 	def type(self, char):
@@ -100,6 +98,8 @@ class Tokenizer(object):
 		element.removeChild(element.childNodes[0])
 		element.appendChild(self.dom.createTextNode('</br>'.join(tokens)))
 		if self.tokens:
+			if self.lowercase:
+				tokens = map(unicode.lower,tokens)
 			self.tokens.write('\n'.join(tokens)+'\n')
 
 def parse_options():

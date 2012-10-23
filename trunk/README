@@ -20,16 +20,20 @@ donde <s> y </s> representan el inicio y fin de sentencia respectivamente.
 
 Información del corpus:
 
-	Nro de Preguntas: 5204
+	Nro de Preguntas: 10424
 	# cat ask.xml | grep -G "\<question[\> ]" | wc -l
 
-	Nro de Respuestas: 4944
+	Nro de Respuestas: 9847
 	# cat ask.xml | grep -G "\<answer\>" | wc -l
 
-	Cantidad de Tokens: 115291
+	Cantidad de Tokens: 218663
 	# wc -w tokens.txt
 
-	Longitud del lexicon: 14218
+	Longitud del lexicon: 26005
 	# sort tokens.txt | uniq | wc -w
+	Longitud del lexicon Minusculas: 20663
+	# sort tokens_lower.txt | uniq | wc -w
 
 # sort tokens.txt | uniq -c | sort /R > count.txt
+# sort tokens.txt | uniq -c | sort -nr > count.txt
+
