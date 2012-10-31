@@ -8,7 +8,7 @@ import codecs
 
 EMOT = [':D',':O',':P',':3',':V','<3','=D','=P','8)','8|','B)','B|',':-D',':-O',
 		':-P','>:O','3:)','8-)','8-|','B-|','O:)']
-EXP = '([^ABCDEFGHIJKLMNOPQRSTUVWXYZ¡…Õ”⁄‹—abcdefghijklmnopqrstuvwxyz·ÈÌÛ˙¸Ò]*)'
+EXP = '([^ABCDEFGHIJKLMNOPQRSTUVWXYZ√Å√â√ç√ì√ö√ëabcdefghijklmnopqrstuvwxyz√°√©√≠√≥√∫√±]*)'
 def flattener(lst):
     return [item for sublist in lst for item in sublist if item != '']
 
