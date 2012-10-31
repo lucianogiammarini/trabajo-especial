@@ -45,5 +45,5 @@ Información del corpus:
 	Cantidad de usuarios: 407
 	# wc -l visited.txt
 
-# sort tokens.txt | uniq -c | sort -nr > count.txt
+# sort tokens.txt | uniq -c | sort -nr > tokens.count
 
