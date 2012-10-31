@@ -23,8 +23,9 @@ Un token puede ser:
 Cada token es divido por el separador </br>
 
 ###############################################################################
-(counter.py tokens.xml -o norm_count.txt)
-(sort userCount.txt -nr -k3 > norm_count.sorted)
+(counter.py tokens.xml -o norm_count.txt -s norm_count.sorted)
+(cut -f1 norm_count.sorted | head -n 1500 > extended_dict.txt)
+(cat extended_dict.txt dict.txt emoticons.txt | sort | uniq > extended_dict.txt)
 
 Información del corpus:
 
@@ -44,6 +45,12 @@ Información del corpus:
 
 	Cantidad de usuarios: 407
 	# wc -l visited.txt
+
+	Cantidad de tokens en el diccionario: 2276 de 26005
+	# wc.py types.txt dict.txt
+
+	Cantidad de tokens en el diccionario extendido: 3294 de 26005
+	# wc.py types.txt extended_dict.txt
 
 # sort tokens.txt | uniq -c | sort -nr > tokens.count
 
