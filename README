@@ -1,5 +1,8 @@
 http://trabajo-especial.googlecode.com/svn/trunk/
 
+###############################################################################
+(crawler.py -c 10000 -v visited.txt -i ignore.txt -o ask.xml user)
+
 El archivo ask.xml, resultante de ejecutar crawler.py, contine las 
 preguntas-respuestas obtenidas del sitio ask.fm, cada una en el siguiente formato
 
@@ -8,15 +11,20 @@ preguntas-respuestas obtenidas del sitio ask.fm, cada una en el siguiente format
 	<answer>....</answer>
 </questionBox>
 
+###############################################################################
+(tokenizer.py ask.xml -o tokens.xml -t tokens.txt -l)
+
 El modulo tokenizer.py toma este archivo como entrada y lo separa en tokens.
 Un token puede ser:
 	*Una palabra (secuencia de letras a..z incluyendo letras con acentos, 
 	dieresis, etc, y incluyendo numeros)
 	*Secuencia de simbolos (los simbolos se separan de las palabras aunque no haya un espacio)
 
-Cada línea del archivo de salida es de la forma
-<s>token-1<br/>token-2<br/>.................<br/>token-n</s>
-donde <s> y </s> representan el inicio y fin de sentencia respectivamente.
+Cada token es divido por el separador </br>
+
+###############################################################################
+(counter.py tokens.xml -o norm_count.txt)
+(sort userCount.txt -nr -k3 > norm_count.sorted)
 
 Información del corpus:
 
@@ -34,6 +42,8 @@ Información del corpus:
 	Longitud del lexicon Minusculas: 20663
 	# sort tokens_lower.txt | uniq | wc -w
 
-# sort tokens.txt | uniq -c | sort /R > count.txt
+	Cantidad de usuarios: 407
+	# wc -l visited.txt
+
 # sort tokens.txt | uniq -c | sort -nr > count.txt
 
