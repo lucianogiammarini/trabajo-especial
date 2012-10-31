@@ -3,8 +3,9 @@
 
 import argparse
 from xml.dom.minidom import parseString
-import sys, re
+import sys, re, os
 import codecs
+from operator import itemgetter
 
 USERS = 407.0
 
@@ -77,6 +78,27 @@ class Counter():
 				self.parent.add(word, user)
 
 		self.parent.count(self.output)
+		self.input.close()
+		self.output.close()
+
+	def sort(self, output, sort):
+		print 'Ordenando'
+		count = codecs.open(output,'r','utf-8')
+		sort = codecs.open(sort,'w','utf-8')
+		lines = count.read().splitlines()
+		lines = map(lambda x: x.split('\t'), lines)
+
+		def foo(lista, types):
+			assert(len(lista)==len(types))
+			for i in range(len(lista)):
+				lista[i] = types[i](lista[i])
+			return lista
+
+		content = map(lambda x: foo(x, [unicode,int,int,float]), lines)
+		s = sorted(content, key=itemgetter(3), reverse=True)
+		sort.write('\n'.join(map('\t'.join, map(lambda x: map(unicode,x),s))))
+		sort.close()
+		
 
 def parse_options():
 	parser = argparse.ArgumentParser()
@@ -84,6 +106,8 @@ def parse_options():
 	parser.add_argument('input', metavar='input', type=str)
 
 	parser.add_argument('-o', '--output', metavar='output', type=str)
+
+	parser.add_argument('-s', '--sort', metavar='sort', type=str)
 
 	return parser.parse_args()
 
@@ -96,6 +120,9 @@ def main():
 	c = Counter(args.input, args.output)
 	sys.setrecursionlimit(50000)
 	c.start()
+
+	if args.sort:
+		c.sort(args.output, args.sort)
 
 if __name__ == "__main__":
     main()

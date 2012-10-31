@@ -30,6 +30,9 @@ class Tokenizer(object):
 
 	def start(self):
 		content = self.input.read()
+		if self.lowercase:
+			content = content.lower().replace('questionbox','questionBox')
+			#tokens = map(unicode.lower,tokens)
 
 		self.dom = parseString(content.encode('utf-8'))
 		question_boxes = self.dom.getElementsByTagName("questionBox")
@@ -98,8 +101,6 @@ class Tokenizer(object):
 		element.removeChild(element.childNodes[0])
 		element.appendChild(self.dom.createTextNode('</br>'.join(tokens)))
 		if self.tokens:
-			if self.lowercase:
-				tokens = map(unicode.lower,tokens)
 			self.tokens.write('\n'.join(tokens)+'\n')
 
 def parse_options():
