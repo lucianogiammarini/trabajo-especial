@@ -24,24 +24,22 @@ Cada token es divido por el separador </br>
 
 ###############################################################################
 (counter.py tokens.xml -o norm_count.txt -s norm_count.sorted)
-(cut -f1 norm_count.sorted | head -n 1500 > extended_dict.txt)
-(cat extended_dict.txt dict.txt emoticons.txt | sort | uniq > extended_dict.txt)
+(cut -f1 norm_count.sorted | head -n 1500 > ask_dict.txt)
+(cat ask_dict.txt dict.txt es_ES.txt emoticons.txt | sort | uniq > extended_dict.txt)
 
 Información del corpus:
 
-	Nro de Preguntas: 10424
+	Nro de Preguntas: 10462
 	# cat ask.xml | grep -G "\<question[\> ]" | wc -l
 
-	Nro de Respuestas: 9847
+	Nro de Respuestas: 9879
 	# cat ask.xml | grep -G "\<answer\>" | wc -l
 
-	Cantidad de Tokens: 218663
+	Cantidad de Tokens: 221735
 	# wc -w tokens.txt
 
-	Longitud del lexicon: 26005
+	Longitud del lexicon: 20746
 	# sort tokens.txt | uniq | wc -w
-	Longitud del lexicon Minusculas: 20663
-	# sort tokens_lower.txt | uniq | wc -w
 
 	Cantidad de usuarios: 407
 	# wc -l visited.txt

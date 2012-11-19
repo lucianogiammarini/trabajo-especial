@@ -117,8 +117,8 @@ def main():
 	print "Cantidad de usuarios: ", int(USERS)
 	# wc -l visited.txt (obtenido de ejecutar crawler -v)
 
-	c = Counter(args.input, args.output)
 	sys.setrecursionlimit(50000)
+	c = Counter(args.input, args.output)
 	c.start()
 
 	if args.sort:

@@ -8,6 +8,19 @@ from bs4 import BeautifulSoup
 
 URL = "http://ask.fm/"
 
+def remove_accents(string):
+	string = string.replace(u'á','a')
+	string = string.replace(u'é','e')
+	string = string.replace(u'í','i')
+	string = string.replace(u'ó','o')
+	string = string.replace(u'ú','u')
+	string = string.replace(u'Á','A')
+	string = string.replace(u'É','E')
+	string = string.replace(u'Í','I')
+	string = string.replace(u'Ó','O')
+	string = string.replace(u'Ú','U')
+	return string
+
 XML_ILLEGAL = [('&', '&amp;'),
 				('<', '&lt;'),
 				('>', '&gt;'),
@@ -76,7 +89,7 @@ class Crawler(object):
 		while len(self.visit) > 0 and self.count > 0:
 			user = self.visit.pop(0)
 			self.visited.append(user)
-			content = self.read(URL + user)
+			content = remove_accents(self.read(URL + user))
 			soup = BeautifulSoup(content, from_encoding="utf-8")
 			responses = int(soup.find(id='profile_answer_counter').string)
 			if responses < 0: 
