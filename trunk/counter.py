@@ -9,7 +9,7 @@ from operator import itemgetter
 
 USERS = 407.0
 
-class Word(object):
+class Word():
 	def __init__(self, letter=None, parent=None):
 		self._parent = parent
 		self._letter = letter

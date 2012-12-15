@@ -5,8 +5,6 @@ from constants import alphabet
 import codecs
 
 class Matrix():
-	def __init(self):
-		pass
 	
 	def load(self, filename):
 		f = codecs.open(filename,'r','utf-8')
@@ -25,14 +23,14 @@ class Matrix():
 
 	def get(self, x, y):
 		if x == u'@':
-			return self.m[len(alphabet), alphabet.find(y)]
-		return self.m[alphabet.find(x), alphabet.find(y)]
+			return self.m[len(alphabet)][alphabet.find(y)]
+		return self.m[alphabet.find(x)][alphabet.find(y)]
 
 	def set(self, x, y, n):
 		if x == u'@':
-			 self.m[len(alphabet), alphabet.find(y)] = n
+			 self.m[len(alphabet)][alphabet.find(y)] = n
 			 return
-		self.m[alphabet.find(x), alphabet.find(y)] = n
+		self.m[alphabet.find(x)][alphabet.find(y)] = n
 
 def main():
 	pass

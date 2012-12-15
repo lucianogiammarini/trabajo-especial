@@ -15,7 +15,7 @@ class Normalizer():
 		self.dict = codecs.open(dict,'r','utf-8').read().splitlines()
 		self.corrections = codecs.open(corrections,'w','utf-8')
 
-	def is_in_dict(self, word, dict):
+	def contains(self, dict, word):
 		length = len(dict)
 		if length == 0:
 			return False
@@ -24,9 +24,9 @@ class Normalizer():
 		if dict[pos] == word:
 			return True
 		elif dict[pos] < word:
-			return self.is_in_dict(word, dict[pos+1:])
+			return self.contains(dict[pos+1:], word)
 		else:
-			return self.is_in_dict(word, dict[:pos])
+			return self.contains(dict[:pos], word)
 
 	def start(self):
 		content = self.input.read()
@@ -40,7 +40,9 @@ class Normalizer():
 
 			tokens = child.nodeValue.split('<br />')
 			for token in tokens:
-				if not self.is_in_dict(token, self.dict):
+				if len(token) < 2:
+					continue
+				if not self.contains(self.dict, token):
 					norm = correct(token)
 					if norm != token:
 						self.corrections.write(token+'\t'+norm+'\n')
