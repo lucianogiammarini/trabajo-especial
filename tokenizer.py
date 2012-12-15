@@ -17,7 +17,7 @@ def enum(**enums):
 
 Type = enum(SYMBOL=0, DIGIT=1, ALPHA=2, SPACE=3)
 
-class Tokenizer(object):
+class Tokenizer():
 
 	def __init__(self, input, output, lowercase, tokens=None):
 		self.input = codecs.open(input,'r','utf-8')
@@ -99,7 +99,7 @@ class Tokenizer(object):
 			pos+=1
 
 		element.removeChild(element.childNodes[0])
-		element.appendChild(self.dom.createTextNode('</br>'.join(tokens)))
+		element.appendChild(self.dom.createTextNode('<br />'.join(tokens)))
 		if self.tokens:
 			self.tokens.write('\n'.join(tokens)+'\n')
 
