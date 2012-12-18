@@ -47,50 +47,47 @@ class SpellCorrector:
 
 	def rank(self, candidates, word):
 		if len(candidates) == 1:
-			print 'only candidate ',
+			#print_('only candidate ',
 			return [(candidates.pop(),)]
 
 		ranking = []
 		n = len(word)
 		for candidate in candidates:
-			ranking.append((candidate,self.corpus.probability(candidate)))
-
 			m = len(candidate)
 			i = 0
 			while i<min(n,m) and candidate[i]==word[i]:
 				i+=1
 
-			print 'candidate ' + candidate + ' '*int(len(candidate)<len(word)+1),
+			#print candidate + '\t',
 			if n<m: # DELETION
 				if i>0:
-					print 'del: ' + candidate[i-1:i+1] + ' typed as ' + candidate[i-1],
-					print self.deletion.get(candidate[i-1],candidate[i])
+					#print 'del: ' + candidate[i-1:i+1] + '\ttyped as ' + candidate[i-1],
+					perror = self.deletion.get(candidate[i-1],candidate[i])/self.corpus.ocurrences(candidate[i-1:i+1])
 				else:
-					print 'del: @' + candidate[i] + ' typed as @',
-					print self.deletion.get('@',candidate[i])
+					#print 'del: @' + candidate[i] + '\ttyped as @',
+					perror = self.deletion.get('@',candidate[i])/self.corpus.ocurrences(candidate[i], start=True)
 			elif n>m: # ADDITION
 				if i>0:
-					print 'add: ' + candidate[i-1] + ' typed as ' + word[i-1:i+1],
-					print self.add.get(word[i-1],word[i])
+					#print 'add: ' + candidate[i-1] + '\ttyped as ' + word[i-1:i+1],
+					perror = self.add.get(candidate[i-1],word[i])/self.corpus.ocurrences(candidate[i-1])
 				else:
-					print 'add: @ typed as @' + word[i],
-					print self.add.get('@',word[i])
+					#print 'add: @\ttyped as @' + word[i],
+					perror = self.add.get('@',word[i])/self.corpus.ocurrences(word[i], start=True)
 			elif n==m:
-				if i+1<n and candidate[i+1]==word[i+1]: # SUBSTITUTION
-					print 'sub: ' + candidate[i] + ' typed as ' + word[i],
-					print self.sub.get(candidate[i],word[i])
-				else: # TRANSPOSITION
-					print 'rev: ' + candidate[i:i+2] + ' typed as ' + word[i:i+2],
-					print self.rev.get(candidate[i],word[i])
+				if i+1<n and candidate[i+1]!=word[i+1]:# TRANSPOSITION
+					#print 'rev: ' + candidate[i:i+2] + '\ttyped as ' + word[i:i+2],
+					perror = self.rev.get(candidate[i],candidate[i+1])/self.corpus.ocurrences(candidate[i:i+2])
+				else:  # SUBSTITUTION
+					#print 'sub: ' + candidate[i] + '\ttyped as ' + word[i],
+					perror = self.sub.get(word[i],candidate[i])/self.corpus.ocurrences(candidate[i])
+		
+			model = self.corpus.probability(candidate)
+			ranking.append((candidate,perror*model))
+			#print '\n\tperror: ', perror, '\tprob(%s): '%candidate, model, '\n\ttotal: ', perror*model
 		
 		return sorted(ranking, key=operator.itemgetter(1), reverse=True)
 
 	def correct(self, word):
-		#if len(self.known([word])) != 0: # Si la palabra es conocida no hay que corregirla
-		#	print 'is in dict',
-		#	return word
-
-		#candidates = self.known([word]).union(self.known(self.edits1(word)))
 		candidates = self.known(self.edits1(word))
 		if len(candidates) == 0:
 			return word # no se encontro ninguna correccion
@@ -99,4 +96,8 @@ class SpellCorrector:
 if __name__ == '__main__':
 	import sys
 	sc = SpellCorrector('../extended_dict.txt', '../tokens.count')
-	print sc.correct(sys.argv[1])
+	word = sys.argv[1]
+	if len(sc.known([word])) != 0: # Si la palabra es conocida no hay que corregirla
+		print 'is in dict',
+	else:
+		print sc.correct(word)

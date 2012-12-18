@@ -1898,7 +1898,7 @@ adame
 adamismo
 adamita
 adan
-Adan
+adan
 adanismo
 adaptable
 adaptacion
@@ -3427,7 +3427,7 @@ ajusticiar
 ajusto
 al
 ala
-Ala
+ala
 alaba
 alabador
 alabancero
@@ -4650,7 +4650,7 @@ altimetro
 altiplanicie
 altiplano
 altisimo
-Altisimo
+altisimo
 altisonancia
 altisonante
 altisono
@@ -5957,7 +5957,7 @@ antesala
 anteve
 antever
 anti
-Antï¿½nimo
+antï¿½nimo
 antia
 antiatomico
 antibiotico
@@ -5997,7 +5997,7 @@ antiguamente
 antiguar
 antigüedad
 antiguo
-Antiguo
+antiguo
 antihelmintico
 antihistaminico
 antillano
@@ -9965,9 +9965,9 @@ azuzar
 azuzo
 b
 b)
-B|
-B-|
-B)
+b|
+b-|
+b)
 baba
 babadero
 babador
@@ -10359,7 +10359,7 @@ balneario
 balneoterapia
 balo
 balon
-Balon
+balon
 baloncestista
 baloncesto
 balonmano
@@ -11205,7 +11205,7 @@ bejuco
 bejuquear
 bel
 belcebu
-Belcebu
+belcebu
 belcho
 beldad
 beldades
@@ -11432,7 +11432,7 @@ bhutan
 biberon
 bibijagua
 biblia
-Biblia
+biblia
 biblico
 bibliofilia
 bibliografia
@@ -12965,7 +12965,7 @@ buzonera
 buzos
 byte
 c
-C
+c
 ca
 cabal
 cabala
@@ -16354,7 +16354,7 @@ cetrino
 cetro
 ceuti
 ch
-CH
+ch
 cha
 chabacana
 chabacanada
@@ -17505,7 +17505,7 @@ ciudadela
 civeta
 civico
 civil
-Civil
+civil
 civilice
 civilisima
 civilista
@@ -21352,7 +21352,7 @@ coyuntura
 coyuntural
 coz
 cpu
-CPU
+cpu
 crac
 crack
 cracoviano
@@ -21387,8 +21387,8 @@ creadnoslo
 creado
 creador
 creador,
-Creador
-Creador,
+creador
+creador,
 creadselo
 crealo
 creame
@@ -21668,7 +21668,7 @@ cristianizo
 cristiano
 cristino
 cristo
-Cristo
+cristo
 cristos
 criterio
 critica
@@ -22506,9 +22506,9 @@ cuzco
 d
 =d
 :d
-=D
-:D
-:-D
+=d
+:d
+:-d
 da
 daale
 daba
@@ -24997,7 +24997,7 @@ deudor
 deudos
 deuterio
 deutscher
-Deutscher
+deutscher
 devalar
 devale
 devaluacion
@@ -25555,7 +25555,7 @@ dioptra
 diorama
 diorita
 dios
-Dios
+dios
 diosa
 dioses
 diosma
@@ -26908,7 +26908,7 @@ edificacion
 edificad
 edificador
 edificador,
-Edificador,
+edificador,
 edifican
 edificante
 edificar
@@ -32358,7 +32358,7 @@ escritor
 escritorio
 escritos
 escritura
-Escritura
+escritura
 escriturar
 escriture
 escrofula
@@ -33315,7 +33315,7 @@ estadistico
 estadiza
 estadizo
 estado
-Estado
+estado
 estadojo
 estados
 estadounidense
@@ -38010,7 +38010,7 @@ globular
 globulo
 globuloso
 gloria
-Gloria
+gloria
 gloriapatri
 gloriar
 gloriarse
@@ -38775,7 +38775,7 @@ guardense
 guarderia
 guardese
 guardia
-Guardia
+guardia
 guardian
 guardilla
 guardo
@@ -39049,7 +39049,7 @@ guzla
 guzman
 guzpatarra
 h
-H
+h
 ha
 haba
 habanero
@@ -39161,7 +39161,7 @@ hacecillo
 haced
 hacedero
 hacedor
-Hacedor
+hacedor
 haceis
 haceme
 hacemos
@@ -41224,7 +41224,7 @@ idoneo
 idumeo
 idus
 iglesia
-Iglesia
+iglesia
 ignaciano
 ignara
 ignaro
@@ -43766,7 +43766,7 @@ jefatura
 jefazo
 jefe
 jehova
-Jehova
+jehova
 jeito
 jeje
 jejeje
@@ -43818,11 +43818,11 @@ jeruga
 jervilla
 jesnato
 jesucristo
-Jesucristo
+jesucristo
 jesuita
 jesuiticamente
 jesus
-Jesus
+jesus
 jesusear
 jesusee
 jet
@@ -44306,7 +44306,7 @@ juzgue
 juzguelo
 juzguenlo
 k
-K
+k
 ka
 kaiser
 kaki
@@ -45550,7 +45550,7 @@ leven
 levente
 leves
 leviatan
-Leviatan
+leviatan
 levigar
 levigo
 levirato
@@ -46634,7 +46634,7 @@ lozania
 lozano
 lozanos
 lp
-LP
+lp
 lpm
 lubigante
 lubina
@@ -46686,7 +46686,7 @@ luciendote
 luciente
 luciernaga
 lucifer
-Lucifer
+lucifer
 luciferino
 lucilina
 lucillo
@@ -46868,7 +46868,7 @@ luxe
 luxemburgo
 luz
 luzbel
-Luzbel
+luzbel
 luzca
 luzco
 m
@@ -49378,7 +49378,7 @@ mesiado
 mesianico
 mesianismo
 mesias
-Mesias
+mesias
 mesiazgo
 mesillo
 mesingo
@@ -51849,7 +51849,7 @@ navio
 nayade
 nayuribe
 nazareno
-Nazareno
+nazareno
 nazareo
 nazari
 nazaries
@@ -52585,7 +52585,7 @@ nueva
 nuevamente
 nueve
 nuevo
-Nuevo
+nuevo
 nuez
 nula
 nulamente
@@ -52670,11 +52670,11 @@ nylon
 ñublar
 o
 :o
-O
->:O
-:O
-:-O
-O:)
+o
+>:o
+:o
+:-o
+o:)
 º
 oasis
 obcecacion
@@ -53017,7 +53017,7 @@ odontologo
 odorifero
 odre
 oeste
-Oeste
+oeste
 ofende
 ofendedor
 ofender
@@ -53077,7 +53077,7 @@ ofuscarse
 ofusco
 ogro
 oh
-OH
+oh
 ohm
 ohmio
 oi
@@ -53145,7 +53145,7 @@ ojosa
 ojoso
 ojota
 ok
-OK
+ok
 oka
 okey
 oki
@@ -53805,7 +53805,7 @@ osar
 osario
 oscense
 oscilacion
-Oscilacion
+oscilacion
 oscilador
 oscilante
 oscilar
@@ -54027,9 +54027,9 @@ oyo
 ozono
 p
 :p
-=P
-:P
-:-P
+=p
+:p
+:-p
 pa
 pabellon
 pabilo
@@ -54081,7 +54081,7 @@ padilla
 padrastro
 padrazo
 padre
-Padre
+padre
 padrear
 padree
 padrenuestro
@@ -54279,7 +54279,7 @@ paleto
 paleton
 palhuen
 paliar
-Paliar
+paliar
 paliativo
 paliatorio
 palidece
@@ -54684,7 +54684,7 @@ parahusar
 parahuse
 parahuso
 paraiso
-Paraiso
+paraiso
 paraje
 parajismo
 paralactico
@@ -55408,7 +55408,7 @@ pazco
 pazguato
 pazote
 pc
-PC
+pc
 pd
 pe
 pea
@@ -55798,7 +55798,7 @@ pelos
 pelosa
 peloso
 pelota
-Pelota
+pelota
 pelotari
 pelotas
 pelote
@@ -56389,7 +56389,7 @@ perpetuo
 perpicaz
 perplejamente
 perplejidad
-Perplejidad
+perplejidad
 perplejo
 perpunte
 perquirir
@@ -61813,7 +61813,7 @@ reden
 redencion
 redendija
 redentor
-Redentor
+redentor
 redentorista
 redera
 redero
@@ -64492,7 +64492,7 @@ sagita
 sagital
 sagitario
 sagrada
-Sagrada
+sagrada
 sagradamente
 sagrado
 sagrario
@@ -64891,7 +64891,7 @@ salvadamente
 salvadera
 salvado
 salvador
-Salvador
+salvador
 salvadoreño
 salvaguarda
 salvaguardar
@@ -65372,7 +65372,7 @@ sazone
 sazonen
 sazono
 schaferhund
-Schaferhund
+schaferhund
 scooter
 scooters
 se
@@ -65871,7 +65871,7 @@ señas
 señolear
 señolee
 señor
-Señor
+señor
 señora
 señorea
 señoread
@@ -69742,7 +69742,7 @@ testadura
 testaferro
 testamentario
 testamento
-Testamento
+testamento
 testan
 testar
 testara
@@ -70321,7 +70321,7 @@ todavia
 todo
 todoo
 todopoderoso
-Todopoderoso
+todopoderoso
 todos
 toe
 toen
@@ -72438,7 +72438,7 @@ ubre
 ubrera
 ucase
 uci
-UCI
+uci
 ucrania
 ucraniano
 ucranio
@@ -72917,7 +72917,7 @@ uve
 uvea
 uvero
 uvi
-UVI
+uvi
 uviar
 uvula
 uvular
@@ -72925,7 +72925,7 @@ uxoricidio
 uzbekistan
 uzo
 v
-:V
+:v
 va
 vaca
 vacacion
@@ -75085,7 +75085,7 @@ yaguar
 yaguarete
 yagure
 yahve
-Yahve
+yahve
 yak
 yambo
 yang

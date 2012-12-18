@@ -30,17 +30,20 @@ class Corpus:
 		self.length_lex = len(self.words)
 		#lista de tupla (palabra, nro de ocurrencias) ordenada por palabra
 
-	def ocurrences(self, subword):
-	# Cuenta la cantidad de ocurrencias de subword en todas las palabras
-		if subword in self.cache:
-			print 'cache'
-			return self.cache[subword]
+	def ocurrences(self, subword, start=False):
+		# Cuenta la cantidad de ocurrencias de subword en todas las palabras
+		if (subword,start) in self.cache:
+			#print '(cache)',
+			return self.cache[(subword,start)]
 
 		c = 0
 		for word,count in self.words:
-			c += word.count(subword)
+			if start:
+				c += int(word.startswith(subword))*count
+			else:
+				c += word.count(subword)*count
 
-		self.cache[subword] = c
+		self.cache[(subword,start)] = c
 		return c
 
 	def probability(self, word):
