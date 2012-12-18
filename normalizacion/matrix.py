@@ -23,8 +23,8 @@ class Matrix():
 
 	def get(self, x, y):
 		if x == u'@':
-			return self.m[len(alphabet)][alphabet.find(y)]
-		return self.m[alphabet.find(x)][alphabet.find(y)]
+			return float(self.m[len(alphabet)][alphabet.find(y)])
+		return float(self.m[alphabet.find(x)][alphabet.find(y)])
 
 	def set(self, x, y, n):
 		if x == u'@':
