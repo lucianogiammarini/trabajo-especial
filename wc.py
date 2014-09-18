@@ -2,23 +2,23 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import sys, re
 import codecs
 
-def contains(dict, word):
-	length = len(dict)
+def contains(dictionary, word):
+	length = len(dictionary)
 	if length == 0:
 		return False
 
 	pos = length/2
-	if dict[pos] == word:
+	if dictionary[pos] == word:
 		return True
-	elif dict[pos] < word:
-		return contains(dict[pos+1:], word)
+	elif dictionary[pos] < word:
+		return contains(dictionary[pos+1:], word)
 	else:
-		return contains(dict[:pos], word)
+		return contains(dictionary[:pos], word)
 
 class WC():
+	""" Determina cuántas palabras del archivo 'tokens' pertenecen al diccionario 'dic' """
 	def __init__(self, tokens, dic):
 		self.tokens = codecs.open(tokens,'r','utf-8')
 		self.dict = codecs.open(dic,'r','utf-8')
@@ -51,5 +51,5 @@ def main():
 	wc.count()
 
 if __name__ == "__main__":
-    main()
+	main()
 
