@@ -23,11 +23,15 @@ Un token puede ser:
 Cada token es divido por el separador </br>
 
 ###############################################################################
+
+El modulo counter.py toma como entrada el archivo tokens.xml y cuenta la cantidad de ocurrencias
+de cada token, la cantidad de usuarios que escribieron dicho token, y el cociente entre ambos.
+
 (counter.py tokens.xml -o norm_count.txt -s norm_count.sorted)
 (cut -f1 norm_count.sorted | head -n 1500 > ask_dict.txt)
 (cat dict.txt ask_dict.txt emoticons.txt | sort | uniq > extended_dict.txt)
 
-Información del corpus:
+InformaciÃ³n del corpus:
 
 	Nro de Preguntas: 10462
 	# cat ask.xml | grep -G "\<question[\> ]" | wc -l
@@ -51,4 +55,3 @@ Información del corpus:
 	# wc.py types.txt extended_dict.txt
 
 # sort tokens.txt | uniq -c | sort -nr > tokens.count
-

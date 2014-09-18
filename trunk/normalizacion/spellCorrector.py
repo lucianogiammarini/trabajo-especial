@@ -6,6 +6,7 @@ Copyright 2007 Peter Norvig.
 Open source code under MIT license: http://www.opensource.org/licenses/mit-license.php
 """
 
+import time
 import re, collections
 import operator
 from corpus import Corpus
@@ -38,10 +39,10 @@ class SpellCorrector:
 		transposes = [a + b[1] + b[0] + b[2:] for a, b in s if len(b)>1]
 		replaces   = [a + c + b[1:] for a, b in s for c in alphabet if b]
 		inserts	= [a + c + b for a, b in s for c in alphabet]
-		return set(deletes + transposes + replaces + inserts)
+		return frozenset(deletes + transposes + replaces + inserts)
 
 	def known_edits2(self, word):
-		return set(e2 for e1 in self.edits1(word) for e2 in self.edits1(e1) if e2 in self.nwords)
+		return frozenset(e2 for e1 in self.edits1(word) for e2 in self.edits1(e1) if e2 in self.nwords)
 
 	def known(self, words): return set(w for w in words if w in self.nwords)
 
@@ -88,7 +89,8 @@ class SpellCorrector:
 		return sorted(ranking, key=operator.itemgetter(1), reverse=True)
 
 	def correct(self, word):
-		candidates = self.known(self.edits1(word))
+		#candidates = self.known(self.edits1(word))
+		candidates = self.known_edits2(word)
 		if len(candidates) == 0:
 			return word # no se encontro ninguna correccion
 		return self.rank(candidates, word)[0][0]
@@ -100,4 +102,8 @@ if __name__ == '__main__':
 	if len(sc.known([word])) != 0: # Si la palabra es conocida no hay que corregirla
 		print 'is in dict',
 	else:
+		start = time.time()
 		print sc.correct(word)
+		end = time.time()
+
+		print "Correction took %g s" % (end - start)

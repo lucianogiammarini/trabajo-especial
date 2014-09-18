@@ -44,10 +44,10 @@ def create_xml(question, answer, author=None, user=None):
 	return xml
 
 def questionBox_filter(tag):
-	questionBox = tag.has_key('class') and \
+	questionBox = tag.has_attr('class') and \
 				tag['class'][0] == "questionBox" and tag.div != None
 	if questionBox:
-		bSlot = tag.div.has_key('class') and \
+		bSlot = tag.div.has_attr('class') and \
 				tag.div['class'][0] == "bSlot"
 		return not bSlot
 	return False
@@ -210,4 +210,4 @@ def main():
 	c.crawl()
 
 if __name__ == "__main__":
-    main()
+	main()

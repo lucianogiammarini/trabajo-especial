@@ -3,7 +3,7 @@
 
 import argparse
 from xml.dom.minidom import parseString
-import sys, re, os
+import sys
 import codecs
 from operator import itemgetter
 
@@ -47,9 +47,9 @@ class Word():
 		return  str(self._count) +' '+ str(self._usersCount) +' '+ str(self._lastUser)
 
 class Counter():
-	def __init__(self, input, output):
-		self.input = codecs.open(input,'r','utf-8')
-		self.output = codecs.open(output,'w','utf-8')
+	def __init__(self, input_filename, output_filename):
+		self.input = codecs.open(input_filename,'r','utf-8')
+		self.output = codecs.open(output_filename,'w','utf-8')
 
 		self.parent = Word()
 
@@ -125,5 +125,5 @@ def main():
 		c.sort(args.output, args.sort)
 
 if __name__ == "__main__":
-    main()
+	main()
 
