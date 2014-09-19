@@ -26,15 +26,21 @@ class Levenshtein:
 
 			for column in xrange( 1, columns ):
 
+				cost = int(word1[column - 1] != word2[row - 1])
+
 				insertCost = currentRow[column - 1] + 1
 				deleteCost = previousRow[column] + 1
+				replaceCost = previousRow[ column - 1 ] + cost
+				
+				minCost = min( insertCost, deleteCost, replaceCost )
+				
+				#if column > 1 and row > 1 \
+				#				and word1[column - 1] == word2[row - 2] \
+				#				and word1[column - 2] == word2[row - 1]:
+				#	transpositionCost = PREV OF PREV previousRow[ column - 2 ] + cost
+				#	minCost = min(minCost, transpositionCost)
 
-				if word1[column - 1] != word2[row - 1]:
-					replaceCost = previousRow[ column - 1 ] + 1
-				else:
-					replaceCost = previousRow[ column - 1 ]
-
-				currentRow.append( min( insertCost, deleteCost, replaceCost ) )
+				currentRow.append( minCost )
 
 		return currentRow[-1]
 
