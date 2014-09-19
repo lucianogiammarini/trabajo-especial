@@ -80,7 +80,7 @@ class LevenshteinTrie:
 					results, maxCost )
 
 if __name__ == '__main__':
-	import sys
+	import sys, resource #@UnresolvedImport
 
 	TARGET = sys.argv[1]
 	MAX_COST = int(sys.argv[2])
@@ -94,3 +94,4 @@ if __name__ == '__main__':
 	for result in results: print result
 
 	print "Search took %g s" % (end - start)
+	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)

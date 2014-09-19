@@ -119,7 +119,7 @@ class Dawg:
 
 
 if __name__ == '__main__':
-	import sys
+	import sys, resource #@UnresolvedImport
 	QUERY = sys.argv[1:]
 
 	dawg = Dawg()
@@ -145,3 +145,5 @@ if __name__ == '__main__':
 			print "%s not in dictionary." % word
 		else:
 			print "%s is in the dictionary." % word
+
+	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)

@@ -1,4 +1,5 @@
 from levenshteinTrie import LevenshteinTrie
+from levenshteinDawg import LevenshteinDawg
 from levenshtein import Levenshtein
 from norvig import Norvig
 
@@ -78,6 +79,20 @@ start = time.time()
 trie = LevenshteinTrie(DICTIONARY)
 end = time.time()
 print "LEVENSHTEIN TRIE\ninit took: %g s" % (end - start)
+
+start = time.time()
+for target in targets:
+	trie.search( target, MAX_COST )
+end = time.time()
+
+print "search took: %g s\n" % (end - start)
+
+#### LevenshteinDawg ####
+
+start = time.time()
+trie = LevenshteinDawg(DICTIONARY)
+end = time.time()
+print "LEVENSHTEIN DAWG\ninit took: %g s" % (end - start)
 
 start = time.time()
 for target in targets:
