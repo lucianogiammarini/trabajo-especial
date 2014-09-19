@@ -1,6 +1,11 @@
 dictionary length: 86016
 targets length: 500
 
+#######################################
+ADD TRANSPOSE TO LEVENSHTEIN TRIE
+#######################################
+
+
 NORVIG (with SET)
 init took: 0.050729 s
 known_edits1 search took: 0.0945818 s

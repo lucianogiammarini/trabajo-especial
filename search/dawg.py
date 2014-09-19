@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # By Steve Hanov, 2011. Released to the public domain.
-import sys
 import time
 
 DICTIONARY = "/usr/share/dict/spanish"
-QUERY = sys.argv[1:]
 
 # This class represents a node in the directed acyclic word graph (DAWG). It
 # has a list of edges to other nodes. It has functions for testing whether it
@@ -18,6 +16,7 @@ class DawgNode:
 		self.id = DawgNode.NextId
 		DawgNode.NextId += 1
 		self.final = False
+		self.word = None
 		self.edges = {}
 
 	def __str__(self):
@@ -53,6 +52,7 @@ class Dawg:
 
 	def insert( self, word ):
 		if word < self.previousWord:
+			print self.previousWord, word 
 			raise Exception("Error: Words must be inserted in alphabetical " +
 				"order.")
 
@@ -81,6 +81,7 @@ class Dawg:
 			node = nextNode
 
 		node.final = True
+		node.word = word
 		self.previousWord = word
 
 	def finish( self ):
@@ -117,26 +118,30 @@ class Dawg:
 		return count
 
 
-dawg = Dawg()
-WordCount = 0
-words = open(DICTIONARY, "rt").read().split()
-#words = ['amar','atar']
-words.sort()
-start = time.time()
-for word in words:
-	WordCount += 1
-	dawg.insert(word)
-	if ( WordCount % 100 ) == 0: print "%dr" % WordCount,
-dawg.finish()
-print "Dawg creation took %g s" % (time.time()-start)
+if __name__ == '__main__':
+	import sys
+	QUERY = sys.argv[1:]
 
-EdgeCount = dawg.edgeCount()
-print "Read %d words into %d nodes and %d edges" % ( WordCount,
-		dawg.nodeCount(), EdgeCount )
-print "This could be stored in as little as %d bytes" % (EdgeCount * 4)
-
-for word in QUERY:
-	if not dawg.lookup( word ):
-		print "%s not in dictionary." % word
-	else:
-		print "%s is in the dictionary." % word
+	dawg = Dawg()
+	WordCount = 0
+	words = open(DICTIONARY, "rt").read().split()
+	#words = ['amar','atar']
+	words.sort()
+	start = time.time()
+	for word in words:
+		WordCount += 1
+		dawg.insert(word)
+		#if ( WordCount % 100 ) == 0: print "%dr" % WordCount,
+	dawg.finish()
+	print "Dawg creation took %g s" % (time.time()-start)
+	
+	EdgeCount = dawg.edgeCount()
+	print "Read %d words into %d nodes and %d edges" % ( WordCount,
+			dawg.nodeCount(), EdgeCount )
+	print "This could be stored in as little as %d bytes" % (EdgeCount * 4)
+	
+	for word in QUERY:
+		if not dawg.lookup( word ):
+			print "%s not in dictionary." % word
+		else:
+			print "%s is in the dictionary." % word
