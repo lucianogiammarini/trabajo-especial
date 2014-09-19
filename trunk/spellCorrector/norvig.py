@@ -46,12 +46,12 @@ class Norvig:
 			return self.known_edits2(word)
 		
 if __name__ == '__main__':
-	import sys
+	import sys, resource #@UnresolvedImport
 
 	TARGET = sys.argv[1]
 	MAX_COST = int(sys.argv[2])
 
-	n = Norvig(DICTIONARY)
+	n = Norvig(DICTIONARY, fset = False)
 		
 	start = time.time()
 	results = n.search(TARGET, MAX_COST)
@@ -60,3 +60,4 @@ if __name__ == '__main__':
 	for result in results: print result
 
 	print "Search took %g s" % (end - start)
+	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)
