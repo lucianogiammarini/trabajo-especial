@@ -2,7 +2,8 @@
 #By Steve Hanov, 2011. Released to the public domain
 import codecs, time
 
-DICTIONARY = "/usr/share/dict/spanish";
+#DICTIONARY = "/usr/share/dict/spanish";
+DICTIONARY = "/home/luciano/Descargas/out2.txt";
 
 class Levenshtein:
 	# for brevity, we omit transposing two characters. Only inserts,
@@ -37,8 +38,8 @@ class Levenshtein:
 				#if column > 1 and row > 1 \
 				#				and word1[column - 1] == word2[row - 2] \
 				#				and word1[column - 2] == word2[row - 1]:
-				#	transpositionCost = PREV OF PREV previousRow[ column - 2 ] + cost
-				#	minCost = min(minCost, transpositionCost)
+				#	transposeCost = PREV OF PREV previousRow[ column - 2 ] + cost
+				#	minCost = min(minCost, transposeCost)
 
 				currentRow.append( minCost )
 
@@ -60,12 +61,10 @@ if __name__ == '__main__':
 	TARGET = sys.argv[1]
 	MAX_COST = int(sys.argv[2])
 
-	# read dictionary file
-	words = codecs.open(dictionary,'rt','utf-8').read().split()
-
+	lev = Levenshtein(DICTIONARY)
 
 	start = time.time()
-	results = search( TARGET, MAX_COST )
+	results = lev.search( TARGET, MAX_COST )
 	end = time.time()
 
 	for result in results: print result

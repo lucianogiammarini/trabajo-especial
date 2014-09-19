@@ -85,13 +85,10 @@ if __name__ == '__main__':
 	TARGET = sys.argv[1]
 	MAX_COST = int(sys.argv[2])
 
-	# read dictionary file into a trie
-	trie = TrieNode()
-	for word in codecs.open(DICTIONARY,'rt','utf-8').read().split():
-		trie.insert( word )
+	lev = LevenshteinTrie(DICTIONARY)
 
 	start = time.time()
-	results = search( TARGET, MAX_COST )
+	results = lev.search( TARGET, MAX_COST )
 	end = time.time()
 
 	for result in results: print result
