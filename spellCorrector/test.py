@@ -19,20 +19,20 @@ print "targets length: %s\n" %len(targets)
 #### Norvig with set ####
 
 start = time.time()
-n = Norvig(DICTIONARY, fset = False)
+#-#n = Norvig(DICTIONARY, fset = False)
 end = time.time()
 print "NORVIG (with SET)\ninit took: %g s" % (end - start)
 
 start = time.time()
-for target in targets:
-	n.search( target, 1 )
+#-#for target in targets:
+#-#	n.search( target, 1 )
 end = time.time()
 
 print "known_edits1 search took: %g s\n" % (end - start)
 
 start = time.time()
-for target in targets:
-	n.search( target, 2 )
+#-#for target in targets:
+#-#	n.search( target, 2 )
 end = time.time()
 
 print "known_edits2 search took: %g s\n" % (end - start)
@@ -40,20 +40,20 @@ print "known_edits2 search took: %g s\n" % (end - start)
 #### Norvig with frozenset ####
 
 start = time.time()
-n = Norvig(DICTIONARY, fset = True)
+#-#n = Norvig(DICTIONARY, fset = True)
 end = time.time()
 print "NORVIG (with FROZENSET)\ninit took: %g s" % (end - start)
 
 start = time.time()
-for target in targets:
-	n.search( target, 1 )
+#-#for target in targets:
+#-#	n.search( target, 1 )
 end = time.time()
 
 print "known_edits1 search took: %g s\n" % (end - start)
 
 start = time.time()
-for target in targets:
-	n.search( target, 2 )
+#-#for target in targets:
+#-#	n.search( target, 2 )
 end = time.time()
 
 print "known_edits2 search took: %g s\n" % (end - start)
@@ -61,13 +61,13 @@ print "known_edits2 search took: %g s\n" % (end - start)
 #### LevenshteinClassic ####
 
 start = time.time()
-lev = Levenshtein(DICTIONARY)
+#-#lev = Levenshtein(DICTIONARY)
 end = time.time()
 print "LEVENSHTEIN\ninit took: %g s" % (end - start)
 
 start = time.time()
-for target in targets:
-	lev.search( target, MAX_COST )
+#-#for target in targets:
+#-#	lev.search( target, MAX_COST )
 end = time.time()
 
 print "search took: %g s\n" % (end - start)
@@ -76,13 +76,13 @@ print "search took: %g s\n" % (end - start)
 #### LevenshteinTrie ####
 
 start = time.time()
-trie = LevenshteinTrie(DICTIONARY)
+#-#trie = LevenshteinTrie(DICTIONARY)
 end = time.time()
 print "LEVENSHTEIN TRIE\ninit took: %g s" % (end - start)
 
 start = time.time()
-for target in targets:
-	trie.search( target, MAX_COST )
+#-#for target in targets:
+#-#	trie.search( target, MAX_COST )
 end = time.time()
 
 print "search took: %g s\n" % (end - start)

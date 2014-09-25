@@ -32,14 +32,14 @@ class LevenshteinDawg:
 		node = self.trie.root
 		# recursively search each branch of the trie
 		for letter in node.edges:
-			self.searchRecursive( node.edges[letter], letter, word, currentRow, 
-				results, maxCost )
+			self.searchRecursive( node.edges[letter], letter, letter, word, 
+								currentRow, results, maxCost )
 
 		return results
 
 	# This recursive helper is used by the search function above. It assumes that
 	# the previousRow has been filled in already.
-	def searchRecursive( self, node, letter, word, previousRow, results, maxCost ):
+	def searchRecursive( self, node, letter, currentWord, word, previousRow, results, maxCost ):
 		columns = len( word ) + 1
 		currentRow = [ previousRow[0] + 1 ]
 
@@ -60,14 +60,15 @@ class LevenshteinDawg:
 		# if the last entry in the row indicates the optimal cost is less than the
 		# maximum cost, and there is a word in this trie node, then add it.
 		if currentRow[-1] <= maxCost and node.final:
-			results.append( (node.word, currentRow[-1] ) )
+			results.append( (currentWord, currentRow[-1] ) )
 
 		# if any entries in the row are less than the maximum cost, then 
 		# recursively search each branch of the trie
 		if min( currentRow ) <= maxCost:
 			for letter in node.edges:
-				self.searchRecursive( node.edges[letter], letter, word, currentRow, 
-					results, maxCost )
+				self.searchRecursive( node.edges[letter], letter, 
+									currentWord+letter, word, currentRow, 
+									results, maxCost )
 
 if __name__ == '__main__':
 	import sys, resource #@UnresolvedImport
@@ -85,7 +86,9 @@ if __name__ == '__main__':
 	results = lev.search( TARGET, MAX_COST )
 	end = time.time()
 
-	for result in results: print result
+	#for result in results: print result
+	for result in results:
+		print result[0], result[1]
 
-	print "Search took %g s" % (end - start)
+	print "\nSearch took %g s" % (end - start)
 	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)
