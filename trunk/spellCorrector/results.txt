@@ -1,6 +1,5 @@
 ############## TODO ###################
-ADD TRANSPOSE EDITION TO LevenshteinTrie
-FIX LevenshteinDawg search
+ADD TRANSPOSE EDITION TO LevenshteinTrie and LevenshteinDawg
 PARSE AND TOKENIZE Araknion CORPUS
 #######################################
 
@@ -9,21 +8,28 @@ dictionary length: 86016
 targets length: 500
 
 
+Init took 0.04654 s
+Search took 0.000653028 s
+Maximum memory usage 14 mb
+
+
 ## NORVIG (with SET)
-init took: 0.050729 s
-known_edits1 	Search took: 0.0945818 s
+known_edits1	Init took: 0.04654 s 	
+				Search took: 0.0945818 s
 				Maximum memory usage 14 mb
 
-known_edits2 	Search took: 35.0955 s
+known_edits2 	Init took: 0.048651 s
+				Search took: 35.0955 s
 				Maximum memory usage 14 mb
 
 
 ## NORVIG (with FROZENSET)
-init took: 0.051589 s
-known_edits1	Search took: 0.0954549 s 
+known_edits1	Init took 0.047605 s
+				Search took: 0.0954549 s 
 				Maximum memory usage 14 mb
 
-known_edits2 	Search took: 34.8907 s
+known_edits2 	Init took 0.04793 s
+				Search took: 34.8907 s
 				Maximum memory usage 14 mb
 
 

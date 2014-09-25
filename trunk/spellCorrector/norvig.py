@@ -51,7 +51,10 @@ if __name__ == '__main__':
 	TARGET = sys.argv[1]
 	MAX_COST = int(sys.argv[2])
 
-	n = Norvig(DICTIONARY, fset = False)
+	start = time.time()
+	n = Norvig(DICTIONARY, fset = True)
+	end = time.time()
+	print "Init took %g s" % (end - start)
 		
 	start = time.time()
 	results = n.search(TARGET, MAX_COST)
