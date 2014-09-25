@@ -76,13 +76,13 @@ print "search took: %g s\n" % (end - start)
 #### LevenshteinTrie ####
 
 start = time.time()
-#-#trie = LevenshteinTrie(DICTIONARY)
+trie = LevenshteinTrie(DICTIONARY)
 end = time.time()
 print "LEVENSHTEIN TRIE\ninit took: %g s" % (end - start)
 
 start = time.time()
-#-#for target in targets:
-#-#	trie.search( target, MAX_COST )
+for target in targets:
+	trie.search( target, MAX_COST )
 end = time.time()
 
 print "search took: %g s\n" % (end - start)
