@@ -16,12 +16,11 @@ class DawgNode:
 		self.id = DawgNode.NextId
 		DawgNode.NextId += 1
 		self.final = False
-		self.word = None
 		self.edges = {}
 
 	def __str__(self):
 		arr = []
-		if self.final: 
+		if self.final:
 			arr.append("1")
 		else:
 			arr.append("0")
@@ -81,7 +80,6 @@ class Dawg:
 			node = nextNode
 
 		node.final = True
-		node.word = word
 		self.previousWord = word
 
 	def finish( self ):

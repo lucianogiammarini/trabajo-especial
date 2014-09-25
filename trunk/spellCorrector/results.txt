@@ -51,8 +51,17 @@ search took: 26.9624 s
 Maximum memory usage 177 mb
 
 
-## LEVENSHTEIN DAWG
-init took: 3.72799 s
+## LEVENSHTEIN DAWG max_cost 1
+init took: 4.11564 s
+search took: 3.74415 s
+Maximum memory usage 42 mb
+
+
+## LEVENSHTEIN DAWG max_cost 2
+init took: 4.15537 s
+search took: 27.0121 s
+Maximum memory usage 42 mb
+
 Read 86016 words into 38873 nodes and 91695 edges
 This could be stored in as little as 366780 bytes
-Maximum memory usage 40 mb
+
