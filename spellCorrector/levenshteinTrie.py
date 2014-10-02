@@ -15,7 +15,7 @@ class TrieNode:
 	def insert( self, word ):
 		node = self
 		for letter in word:
-			if letter not in node.children: 
+			if letter not in node.children:
 				node.children[letter] = TrieNode()
 
 			node = node.children[letter]
@@ -29,7 +29,7 @@ class LevenshteinTrie:
 		self.trie = TrieNode()
 		for word in codecs.open(dictionary,'rt','utf-8').read().split():
 			self.trie.insert( word )
-
+		
 	# The search function returns a list of all words that are less than the given
 	# maximum distance from the target word
 	def search( self, word, maxCost ):
@@ -41,43 +41,49 @@ class LevenshteinTrie:
 
 		# recursively search each branch of the trie
 		for letter in self.trie.children:
-			self.searchRecursive( self.trie.children[letter], letter, word, currentRow, 
-				results, maxCost )
+			self.searchRecursive( self.trie.children[letter], letter, word,
+								[None, currentRow], results, maxCost )
 
 		return results
 
 	# This recursive helper is used by the search function above. It assumes that
 	# the previousRow has been filled in already.
-	def searchRecursive( self, node, letter, word, previousRow, results, maxCost ):
-
+	def searchRecursive( self, node, currentWord, word, previousRows, results, maxCost ):
+		
+		letter = currentWord[-1]
 		columns = len( word ) + 1
-		currentRow = [ previousRow[0] + 1 ]
+		currentRow = [ previousRows[1][0] + 1 ]
 
 		# Build one row for the letter, with a column for each letter in the target
 		# word, plus one for the empty string at column 0
 		for column in xrange( 1, columns ):
 
+			cost = int( word[column - 1] != letter )
 			insertCost = currentRow[column - 1] + 1
-			deleteCost = previousRow[column] + 1
+			deleteCost = previousRows[1][column] + 1
+			replaceCost = previousRows[1][ column - 1 ] + cost
 
-			if word[column - 1] != letter:
-				replaceCost = previousRow[ column - 1 ] + 1
-			else:
-				replaceCost = previousRow[ column - 1 ]
+			minimum = min( insertCost, deleteCost, replaceCost )
 
-			currentRow.append( min( insertCost, deleteCost, replaceCost ) )
+			if previousRows[0] != None and column > 1 and \
+				word[column - 1] == currentWord[-2] and word[column - 2] == letter:
+
+				transpositionCost = previousRows[0][column - 2] + cost
+				minimum = min( minimum, transpositionCost )
+
+			currentRow.append( minimum )
 
 		# if the last entry in the row indicates the optimal cost is less than the
 		# maximum cost, and there is a word in this trie node, then add it.
 		if currentRow[-1] <= maxCost and node.word != None:
 			results.append( (node.word, currentRow[-1] ) )
 
-		# if any entries in the row are less than the maximum cost, then 
+		# if any entries in the row are less than the maximum cost, then
 		# recursively search each branch of the trie
 		if min( currentRow ) <= maxCost:
 			for letter in node.children:
-				self.searchRecursive( node.children[letter], letter, word, currentRow, 
-					results, maxCost )
+				self.searchRecursive( node.children[letter], currentWord + letter,
+									word, [previousRows[1], currentRow], results, maxCost )
 
 if __name__ == '__main__':
 	import sys, resource #@UnresolvedImport
