@@ -32,30 +32,36 @@ class LevenshteinDawg:
 		node = self.trie.root
 		# recursively search each branch of the trie
 		for letter in node.edges:
-			self.searchRecursive( node.edges[letter], letter, letter, word, 
-								currentRow, results, maxCost )
+			self.searchRecursive( node.edges[letter], letter, word, 
+								[None, currentRow], results, maxCost )
 
 		return results
 
 	# This recursive helper is used by the search function above. It assumes that
 	# the previousRow has been filled in already.
-	def searchRecursive( self, node, letter, currentWord, word, previousRow, results, maxCost ):
+	def searchRecursive( self, node, currentWord, word, previousRows, results, maxCost ):
+		letter = currentWord[-1]
 		columns = len( word ) + 1
-		currentRow = [ previousRow[0] + 1 ]
+		currentRow = [ previousRows[1][0] + 1 ]
 
 		# Build one row for the letter, with a column for each letter in the target
 		# word, plus one for the empty string at column 0
 		for column in xrange( 1, columns ):
 
+			cost = int( word[column - 1] != letter )
 			insertCost = currentRow[column - 1] + 1
-			deleteCost = previousRow[column] + 1
+			deleteCost = previousRows[1][column] + 1
+			replaceCost = previousRows[1][ column - 1 ] + cost
 
-			if word[column - 1] != letter:
-				replaceCost = previousRow[ column - 1 ] + 1
-			else:
-				replaceCost = previousRow[ column - 1 ]
+			minimum = min( insertCost, deleteCost, replaceCost )
+			
+			if previousRows[0] != None and column > 1 and \
+				word[column - 1] == currentWord[-2] and word[column - 2] == letter:
 
-			currentRow.append( min( insertCost, deleteCost, replaceCost ) )
+				transpositionCost = previousRows[0][column - 2] + cost
+				minimum = min( minimum, transpositionCost )
+
+			currentRow.append( minimum )
 
 		# if the last entry in the row indicates the optimal cost is less than the
 		# maximum cost, and there is a word in this trie node, then add it.
@@ -66,8 +72,8 @@ class LevenshteinDawg:
 		# recursively search each branch of the trie
 		if min( currentRow ) <= maxCost:
 			for letter in node.edges:
-				self.searchRecursive( node.edges[letter], letter, 
-									currentWord+letter, word, currentRow, 
+				self.searchRecursive( node.edges[letter], currentWord+letter, 
+									word, [previousRows[1], currentRow], 
 									results, maxCost )
 
 if __name__ == '__main__':
