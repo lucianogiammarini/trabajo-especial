@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 Created on 19/9/2014
 
@@ -6,7 +8,7 @@ Created on 19/9/2014
 from dawg import Dawg
 import codecs, time
 
-DICTIONARY = "/usr/share/dict/spanish";
+DICTIONARY = "/usr/share/dict/spanish"
 
 class LevenshteinDawg:
 	def __init__( self, dictionary ):
