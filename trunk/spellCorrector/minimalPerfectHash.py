@@ -10,12 +10,9 @@
 # also a good reference:
 # Compress, Hash, and Displace algorithm by Djamal Belazzougui,
 # Fabiano C. Botelho, and Martin Dietzfelbinger
-import sys, time
 
+import codecs
 DICTIONARY = "/usr/share/dict/spanish"
-TEST_WORDS = sys.argv[1:]
-if len(TEST_WORDS) == 0:
-	TEST_WORDS = ['hola', 'adiós', 'perro', 'gato']
 
 # Calculates a distinct hash function for a given string. Each value of the
 # integer d results in a different hash value.
@@ -101,22 +98,30 @@ def PerfectHashLookup( G, V, key ):
 	if d < 0: return V[-d-1]
 	return V[hash(d, key) % len(V)]
 
-print "Reading words"
-dict = {}  # @ReservedAssignment
-line = 1
-for key in open(DICTIONARY, "rt").readlines():
-	dict[key.strip()] = line
-	line += 1
+if __name__ == '__main__':
+	import sys, time, resource  # @UnresolvedImport
+	
+	QUERY = sys.argv[1:]
+	if len(QUERY) == 0:
+		QUERY = [u'hola', u'adiós', u'perro', u'gato']
 
-print "Creating perfect hash"
-start = time.time()
-(G, V) = CreateMinimalPerfectHash( dict )
+	print "Reading words"
+	dict = {}  # @ReservedAssignment
+	line = 1
+	for key in codecs.open(DICTIONARY,'rt','utf-8').readlines():
+		dict[key.strip()] = line
+		line += 1
 
-print "MinimalPerfectHash creation took %g s" % (time.time()-start)
-
-start = time.time()
-for word in TEST_WORDS:
-	line = PerfectHashLookup( G, V, word )
-	print "Word %s occurs on line %d" % (word, line)
-
-print "\nMinimalPerfectHash lookup took %g s" % (time.time()-start)
+	print "Creating perfect hash"
+	start = time.time()
+	(G, V) = CreateMinimalPerfectHash( dict )
+	
+	print "MinimalPerfectHash creation took %g s" % (time.time()-start)
+	
+	start = time.time()
+	for word in QUERY:
+		line = PerfectHashLookup( G, V, word )
+		print "Word %s occurs on line %d" % (word, line)
+	
+	print "\nMinimalPerfectHash lookup took %g s" % (time.time()-start)
+	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)

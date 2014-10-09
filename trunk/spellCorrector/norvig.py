@@ -44,7 +44,7 @@ class Norvig:
 			return self.known(self.edits1(word))
 		else:
 			return self.known_edits2(word)
-		
+
 if __name__ == '__main__':
 	import sys, resource #@UnresolvedImport
 

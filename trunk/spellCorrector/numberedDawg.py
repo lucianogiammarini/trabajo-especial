@@ -12,17 +12,16 @@ from dawg import Dawg, DawgNode
 class NumberedDawgNode( DawgNode ):
 
 	def __init__( self ):
-		#super(NumberedDawgNode, self).__init__()
 		DawgNode.__init__(self)
 		self.number = None
 
 class NumberedDawg( Dawg ):
 
 	def finish( self ):
-		#super(self.__class__, self).finish()
 		Dawg.finish(self)
 		self.numbering(self.root)
 	
+	# Store in each internal node the number of leaf nodes that are reachable from it
 	def numbering( self , node ):
 		children = node.edges.values()
 		if len(children) == 0:
@@ -80,27 +79,38 @@ class NumberedDawg( Dawg ):
 
 if __name__ == '__main__':
 	import sys, resource #@UnresolvedImport
+
 	QUERY = sys.argv[1:]
+	if len(QUERY) == 0:
+		QUERY = ['hola', 'adiós', 'perro', 'gato']
 
 	dawg = NumberedDawg()
-	WordCount = 0
 	words = codecs.open(DICTIONARY,'rt','utf-8').read().split()
 	#words = ['uno', 'dos', 'tres']
 	words.sort()
-
+	
+	print "Reading words"
 	start = time.time()
+	WordCount = 0
 	for word in words:
 		WordCount += 1
 		dawg.insert(word)
 		#if ( WordCount % 100 ) == 0: print "%dr" % WordCount,
 	dawg.finish()
+	print "NumberedDawg creation took %g s" % (time.time()-start)
 
-	print "Dawg creation took %g s" % (time.time()-start)
+	start = time.time()
+	values = [0]*len(words)  # @ReservedAssignment
+	for word in words:
+		values[dawg.wordToIndex(word)-1] = len(word)
+	print "values dict creation took %g s" % (time.time()-start)
 	
+	start = time.time()
 	for word in QUERY:
 		if not dawg.lookup( word ):
 			print "%s not in dictionary." % word
 		else:
-			print "%s is in the dictionary. index: %s" % (word, dawg.wordToIndex(word))
+			print "%s is in the dictionary. value: %s" % (word, values[dawg.wordToIndex(word)-1])
 
+	print "\nnumberedDawg lookup took %g s" % (time.time()-start)
 	print "Maximum memory usage %g mb" % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000)
