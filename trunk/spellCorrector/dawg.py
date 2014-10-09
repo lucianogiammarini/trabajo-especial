@@ -3,7 +3,6 @@
 
 # By Steve Hanov, 2011. Released to the public domain.
 import codecs, time
-ALPHABET = u'abcdefghijklmnopqrstuvwxyzáéíñóúü'
 
 DICTIONARY = "/usr/share/dict/spanish"
 
@@ -20,7 +19,6 @@ class DawgNode:
 		DawgNode.NextId += 1
 		self.final = False
 		self.edges = {}
-		self.number = None
 
 	def __str__(self):
 		arr = []
@@ -89,7 +87,6 @@ class Dawg:
 	def finish( self ):
 		# minimize all uncheckedNodes
 		self._minimize( 0 )
-		self.numbering(self.root)
 
 	def _minimize( self, downTo ):
 		# proceed from the leaf up to a certain point
@@ -110,61 +107,6 @@ class Dawg:
 			node = node.edges[letter]
 
 		return node.final
-	
-	def numbering( self , node ):
-		children = node.edges.values()
-		if len(children) == 0:
-			node.number = int(node.final)
-			return node.number
-		
-		sum = int(node.final)  # @ReservedAssignment
-		for child in children:
-			sum += self.numbering(child)
-		
-		node.number = sum
-		return node.number
-	
-	def wordToIndex( self, word ):
-		index = 0
-		currentState = self.root
-		for letter in word:
-			keys = currentState.edges.keys()
-			keys.sort()
-			if letter in keys:
-				for c in keys[:keys.index(letter)]: # for c firstLetter to predecessor(letter)
-					if c in keys:
-						index += currentState.edges[c].number
-				currentState = currentState.edges[letter]
-				if currentState.final:
-					index += 1
-			else:
-				return -1
-
-		if currentState.final:
-			return index
-		else:
-			return -1
-
-	def indexToWord( self, index ):
-		currentState = self.root
-		count = index
-		word = ''
-
-		while count > 0:
-			for c in ALPHABET:
-				if c in currentState.edges.keys():
-					auxState = currentState.edges[c]
-					if auxState.number < count:
-						count -= auxState.number
-					else:
-						word += c
-						currentState = auxState
-						if currentState.final:
-							count -= 1
-							break
-
-		return word
-		
 
 	def nodeCount( self ):
 		return len(self.minimizedNodes)

@@ -16,7 +16,9 @@ print "targets length: %s\n" %len(targets)
 
 #targets = open(TARGETS, "rt").read().split()
 
-#### Norvig with set ####
+#===============================================================================
+# Norvig with set
+#===============================================================================
 
 start = time.time()
 #-#n = Norvig(DICTIONARY, fset = False)
@@ -37,7 +39,9 @@ end = time.time()
 
 print "known_edits2 search took: %g s\n" % (end - start)
 
-#### Norvig with frozenset ####
+#===============================================================================
+# Norvig with frozenset
+#===============================================================================
 
 start = time.time()
 #-#n = Norvig(DICTIONARY, fset = True)
@@ -58,8 +62,9 @@ end = time.time()
 
 print "known_edits2 search took: %g s\n" % (end - start)
 
-#### LevenshteinClassic ####
-
+#===============================================================================
+# Levenshtein
+#===============================================================================
 start = time.time()
 #-#lev = Levenshtein(DICTIONARY)
 end = time.time()
@@ -72,8 +77,9 @@ end = time.time()
 
 print "search took: %g s\n" % (end - start)
 
-
-#### LevenshteinTrie ####
+#===============================================================================
+# LevenshteinTrie
+#===============================================================================
 
 start = time.time()
 trie = LevenshteinTrie(DICTIONARY)
@@ -87,7 +93,9 @@ end = time.time()
 
 print "search took: %g s\n" % (end - start)
 
-#### LevenshteinDawg ####
+#===============================================================================
+# LevenshteinDawg
+#===============================================================================
 
 start = time.time()
 trie = LevenshteinDawg(DICTIONARY)

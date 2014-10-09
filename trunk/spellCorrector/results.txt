@@ -24,7 +24,7 @@ known_edits2 	Init took: 0.048651 s
 #===============================================================================
 
 known_edits1	Init took 0.047605 s
-				Search took: 0.0954549 s 
+				Search took: 	 
 				Maximum memory usage 14 mb
 
 known_edits2 	Init took 0.04793 s
