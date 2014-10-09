@@ -17,6 +17,7 @@ class DawgNode:
 		DawgNode.NextId += 1
 		self.final = False
 		self.edges = {}
+		self.number = None
 
 	def __str__(self):
 		arr = []
@@ -105,6 +106,19 @@ class Dawg:
 			node = node.edges[letter]
 
 		return node.final
+	
+	def numbering( self , node ):
+		children = node.edges.values()
+		if len(children) == 0:
+			node.number = int(node.final)
+			return node.number
+		
+		sum = 0
+		for child in children:
+			sum += numbering(child)
+		
+		node.number = sum
+		return node.number
 
 	def nodeCount( self ):
 		return len(self.minimizedNodes)
